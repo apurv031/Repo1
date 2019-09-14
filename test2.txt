@@ -1,0 +1,12 @@
+git config --global user.email "github email"
+git config --global user.name "github user name"
+
+
+1-git init--to initialise files and folders
+2-git status
+3-git add
+4-git commit -m "message"
+5-git remote add origin https://github.com/apurv031/Repo1.git
+6-git push -u origin master
+7-git log
+8-git --help
