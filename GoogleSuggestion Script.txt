@@ -1,0 +1,43 @@
+package DemoTestNG;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class SeleniumTest {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver", ".\\exe\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.google.com/");
+		driver.manage().window().maximize();
+	}
+	
+	@Test
+	public void selectingElements() {
+		driver.findElement(By.xpath("//input[@title='Search']")).sendKeys("Selenium WebDr");
+		driver.manage().timeouts().implicitlyWait(40000, TimeUnit.MILLISECONDS);
+		List<WebElement> elements = driver.findElements(By.xpath("//ul[@role='listbox']//li"));
+		System.out.println("Suggestion list is ::" +elements.size());
+		for(int i = 0; i<=elements.size(); i++) {
+			System.out.println(elements.get(i).getText());
+			if(elements.get(i).getText().equalsIgnoreCase("selenium webdriver maven")) {
+				elements.get(i).click();
+				break;
+			}
+		}
+	}	
+	@AfterTest
+	public void close() {
+		driver.close();
+	
+	}
+}
